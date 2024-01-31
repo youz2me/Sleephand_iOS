@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
-        self.window?.rootViewController = ViewController()
+        self.window?.rootViewController = LandingVC()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
