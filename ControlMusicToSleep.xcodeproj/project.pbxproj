@@ -14,6 +14,9 @@
 		DD2582D02B6A4D1D00ED62B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD2582CF2B6A4D1D00ED62B2 /* Assets.xcassets */; };
 		DD2582D32B6A4D1D00ED62B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD2582D12B6A4D1D00ED62B2 /* LaunchScreen.storyboard */; };
 		DD2582DC2B6A4DE800ED62B2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD2582DB2B6A4DE800ED62B2 /* CoreBluetooth.framework */; };
+		DD756BA22B6AB44400F2CD03 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD756BA12B6AB44400F2CD03 /* BluetoothSerial.swift */; };
+		DD756BA52B6AB47B00F2CD03 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD756BA42B6AB47B00F2CD03 /* SnapKit */; };
+		DD756BA82B6AB48700F2CD03 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DD756BA72B6AB48700F2CD03 /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,7 @@
 		DD2582D22B6A4D1D00ED62B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD2582D42B6A4D1D00ED62B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD2582DB2B6A4DE800ED62B2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DD756BA12B6AB44400F2CD03 /* BluetoothSerial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +38,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD2582DC2B6A4DE800ED62B2 /* CoreBluetooth.framework in Frameworks */,
+				DD756BA82B6AB48700F2CD03 /* Then in Frameworks */,
+				DD756BA52B6AB47B00F2CD03 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +73,7 @@
 				DD2582D12B6A4D1D00ED62B2 /* LaunchScreen.storyboard */,
 				DD2582D42B6A4D1D00ED62B2 /* Info.plist */,
 				DD2582CC2B6A4D1C00ED62B2 /* ControlMusicToSleep.xcdatamodeld */,
+				DD756BA12B6AB44400F2CD03 /* BluetoothSerial.swift */,
 			);
 			path = ControlMusicToSleep;
 			sourceTree = "<group>";
@@ -95,6 +102,10 @@
 			dependencies = (
 			);
 			name = ControlMusicToSleep;
+			packageProductDependencies = (
+				DD756BA42B6AB47B00F2CD03 /* SnapKit */,
+				DD756BA72B6AB48700F2CD03 /* Then */,
+			);
 			productName = ControlMusicToSleep;
 			productReference = DD2582C02B6A4D1C00ED62B2 /* ControlMusicToSleep.app */;
 			productType = "com.apple.product-type.application";
@@ -123,6 +134,10 @@
 				Base,
 			);
 			mainGroup = DD2582B72B6A4D1C00ED62B2;
+			packageReferences = (
+				DD756BA32B6AB47B00F2CD03 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DD756BA62B6AB48600F2CD03 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = DD2582C12B6A4D1C00ED62B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -153,6 +168,7 @@
 				DD2582C82B6A4D1C00ED62B2 /* ViewController.swift in Sources */,
 				DD2582C42B6A4D1C00ED62B2 /* AppDelegate.swift in Sources */,
 				DD2582C62B6A4D1C00ED62B2 /* SceneDelegate.swift in Sources */,
+				DD756BA22B6AB44400F2CD03 /* BluetoothSerial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +383,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD756BA32B6AB47B00F2CD03 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
+		DD756BA62B6AB48600F2CD03 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD756BA42B6AB47B00F2CD03 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD756BA32B6AB47B00F2CD03 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		DD756BA72B6AB48700F2CD03 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD756BA62B6AB48600F2CD03 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DD2582CC2B6A4D1C00ED62B2 /* ControlMusicToSleep.xcdatamodeld */ = {
