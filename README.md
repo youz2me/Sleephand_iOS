@@ -4,3 +4,5 @@
 ![5](https://github.com/youz2me/Sleephand_iOS/assets/80394340/13ef3922-4233-4f90-a4f9-8ef318419577)
 ![6](https://github.com/youz2me/Sleephand_iOS/assets/80394340/de86459a-ed09-4bef-af2d-fe1eacaa758c)
 ![9](https://github.com/youz2me/Sleephand_iOS/assets/80394340/955a6c6e-812e-4049-aec0-8f89d27b7a61)
+![10](https://github.com/youz2me/Sleephand_iOS/assets/80394340/c1e539d3-b002-457a-9064-0085676b998b)
+![13](https://github.com/youz2me/Sleephand_iOS/assets/80394340/d6673062-b1c0-46cf-be79-20dc6bd05bbb)
