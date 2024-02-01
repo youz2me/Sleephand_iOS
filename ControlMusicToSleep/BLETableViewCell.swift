@@ -36,7 +36,7 @@ class BLETableViewCell: UITableViewCell {
         
         aboveView.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(1)
+            $0.height.equalTo(0.5)
         }
         
         BLENameLabel.snp.makeConstraints {
@@ -47,6 +47,7 @@ class BLETableViewCell: UITableViewCell {
         underView.snp.makeConstraints {
             $0.top.equalTo(BLENameLabel.snp.bottom).offset(24)
             $0.left.right.equalToSuperview()
+            $0.height.equalTo(0.5)
             $0.bottom.equalToSuperview()
         }
     }

@@ -6,12 +6,15 @@
 //
 
 import CoreBluetooth
+import MediaPlayer
 import UIKit
 
 import SnapKit
 import Then
 
-class ConnectBLEVC: UIViewController, BluetoothSerialDelegate {
+class ConnectBLEVC: UIViewController {
+    
+    private let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
     private var backgroundImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "ConnectBackground")
@@ -23,9 +26,10 @@ class ConnectBLEVC: UIViewController, BluetoothSerialDelegate {
         $0.register(BLETableViewCell.self, forCellReuseIdentifier: BLETableViewCell().cellID)
     }
     
-    // 현재 검색된 peripheralList
-    private var peripheralList : [(peripheral : CBPeripheral, RSSI : Float)] = []
-
+    private var peripherals: [CBPeripheral] = []
+    private var centralManager: CBCentralManager!
+    private var connectedBLE: CBPeripheral?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +37,9 @@ class ConnectBLEVC: UIViewController, BluetoothSerialDelegate {
         
         view.addSubview(backgroundImageView)
         view.addSubview(BLETableView)
+        
+        BLETableView.dataSource = self
+        BLETableView.delegate = self
         
         backgroundImageView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
@@ -44,56 +51,115 @@ class ConnectBLEVC: UIViewController, BluetoothSerialDelegate {
             $0.bottom.equalToSuperview()
         }
         
-        serial = BluetoothSerial.init()
-        serial.delegate = self
-        serial.startScan()
-        print("스캔 시작")
-    }
-    
-    func serialDidDiscoverPeripheral(peripheral: CBPeripheral, RSSI: NSNumber?) {
-        /// serial의 delegate에서 호출됨
-        /// 이미 저장되어 있는 기기라면 return
-        for existing in peripheralList {
-            if existing.peripheral.identifier == peripheral.identifier {return}
-        }
+        centralManager = CBCentralManager(delegate: self, queue: nil)
         
-        /// 신호의 세기에 따라 정렬
-        let fRSSI = RSSI?.floatValue ?? 0.0
-        peripheralList.append((peripheral : peripheral , RSSI : fRSSI))
-        peripheralList.sort { $0.RSSI < $1.RSSI}
-        
-        /// tableView를 다시 호출하여 검색된 기기가 반영되도록 함
-        DispatchQueue.main.async {
-            print("tableView를 다시 호출")
-            self.BLETableView.reloadData()
+        if(!centralManager.isScanning) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                print("스캔 시작")
+                self.centralManager?.scanForPeripherals(withServices: [CBUUID(string: "FEE0")])
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.centralManager.stopScan()
+                    print("스캔 끝")
+                }
+            }
         }
     }
+}
+
+extension ConnectBLEVC : CBPeripheralDelegate, CBCentralManagerDelegate {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state {
+        case .unknown:
+            print("unknown")
+        case .resetting:
+            print("restting")
+        case .unsupported:
+            print("unsupported")
+        case .unauthorized:
+            print("unauthorized")
+        case .poweredOff:
+            print("power Off")
+        case .poweredOn:
+            print("power on")
+        @unknown default:
+            fatalError()
+        }
+    }
     
-    func serialDidConnectPeripheral(peripheral: CBPeripheral) {
-        /// serial의 delegate에서 호출됨
-        /// 연결 성공 시 alert를 띄우고, alert 확인 시 View를 dismiss
-        let connectSuccessAlert = UIAlertController(title: "블루투스 연결 성공", message: "\(peripheral.name ?? "알수없는기기")와 성공적으로 연결되었습니다.", preferredStyle: .actionSheet)
-        let confirm = UIAlertAction(title: "확인", style: .default, handler: { _ in self.dismiss(animated: true, completion: nil) } )
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        let check: Bool = false
+        if !check {
+            peripherals.append(peripheral)
+            
+            BLETableView.reloadData()
+        }
+    }
+    
+    // 기기 연결가 연결되면 호출되는 메서드입니다.
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("연결 성공: \(peripheral.name!)")
+        peripheral.delegate = self
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
+        print("didUpdateValueFor")
         
-        connectSuccessAlert.addAction(confirm)
+        if musicPlayer.playbackState == .playing {
+            musicPlayer.stop()
+        }
+        else {
+            musicPlayer.play()
+        }
+    }
+    
+    // characteristic 검색에 성공 시 호출되는 메서드입니다.
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        print("dmdkdkdkdk")
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("didWriteValueFor")
         
-        serial.delegate = nil
+        if musicPlayer.playbackState == .playing {
+            musicPlayer.stop()
+        }
+        else {
+            musicPlayer.play()
+        }
+    }
+    
+    // 블루투스 기기의 신호 강도를 요청하는 peripheral.readRSSI()가 호출하는 함수입니다.
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        // 신호 강도와 관련된 코드를 작성합니다.(필요하다면 작성해주세요.)
+    }
+    
+    // peripheral으로부터 데이터를 전송받으면 호출되는 메서드입니다.
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("didUpdateValueFor")
         
-        present(connectSuccessAlert, animated: true, completion: nil)
+        if musicPlayer.playbackState == .playing {
+            musicPlayer.stop()
+        }
+        else {
+            musicPlayer.play()
+        }
     }
 }
 
 extension ConnectBLEVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return peripheralList.count
+        return peripherals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BLETableViewCell().cellID, for: indexPath) as! BLETableViewCell
         
-        if let peripheralName = peripheralList[indexPath.row].peripheral.name {
-            cell.BLENameLabel.text = peripheralName
-        }
+        let peripheralName = peripherals[indexPath.row].name
+        cell.BLENameLabel.text = peripheralName
+
+        cell.backgroundColor = .clear
+        
 
         return cell
     }
@@ -103,17 +169,15 @@ extension ConnectBLEVC: UITableViewDelegate, UITableViewDataSource {
         /// 테이블 뷰의 셀을 선택했을 때 UI에 나타나는 효과
         tableView.deselectRow(at: indexPath, animated: true)
         
-        /// 선택된 Pheripheral을 연결함
-        /// 검색을 중단하고, peripheralList에 저장된 peripheral 중 클릭된 것을 찾아 연결함
-        serial.stopScan()
+        centralManager.stopScan()
         
-        let selectedPeripheral = peripheralList[indexPath.row].peripheral
+        centralManager.connect(peripherals[indexPath.row])
         
-        /// serial의 connectToPeripheral 함수에 선택된 peripheral을 연결하도록 요청함
-        serial.connectToPeripheral(selectedPeripheral)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        let sleepingVC = SleepingVC()
+        
+        sleepingVC.modalTransitionStyle = .crossDissolve
+        sleepingVC.modalPresentationStyle = .fullScreen
+        
+        self.present(sleepingVC, animated: true)
     }
 }

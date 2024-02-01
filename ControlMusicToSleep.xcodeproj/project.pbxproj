@@ -14,6 +14,7 @@
 		DD2582D02B6A4D1D00ED62B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD2582CF2B6A4D1D00ED62B2 /* Assets.xcassets */; };
 		DD2582D32B6A4D1D00ED62B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD2582D12B6A4D1D00ED62B2 /* LaunchScreen.storyboard */; };
 		DD2582DC2B6A4DE800ED62B2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD2582DB2B6A4DE800ED62B2 /* CoreBluetooth.framework */; };
+		DD3190DF2B6BC1B300C14B31 /* SleepingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3190DE2B6BC1B300C14B31 /* SleepingVC.swift */; };
 		DD756BA22B6AB44400F2CD03 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD756BA12B6AB44400F2CD03 /* BluetoothSerial.swift */; };
 		DD756BA52B6AB47B00F2CD03 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD756BA42B6AB47B00F2CD03 /* SnapKit */; };
 		DD756BA82B6AB48700F2CD03 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DD756BA72B6AB48700F2CD03 /* Then */; };
@@ -31,6 +32,7 @@
 		DD2582D22B6A4D1D00ED62B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD2582D42B6A4D1D00ED62B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD2582DB2B6A4DE800ED62B2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DD3190DE2B6BC1B300C14B31 /* SleepingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepingVC.swift; sourceTree = "<group>"; };
 		DD756BA12B6AB44400F2CD03 /* BluetoothSerial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
 		DD756BA92B6AC30B00F2CD03 /* ConnectBLEVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectBLEVC.swift; sourceTree = "<group>"; };
 		DD756BAB2B6AC99000F2CD03 /* BLETableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETableViewCell.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				DD2582C72B6A4D1C00ED62B2 /* LandingVC.swift */,
 				DD756BA92B6AC30B00F2CD03 /* ConnectBLEVC.swift */,
 				DD756BAB2B6AC99000F2CD03 /* BLETableViewCell.swift */,
+				DD3190DE2B6BC1B300C14B31 /* SleepingVC.swift */,
 				DD2582CF2B6A4D1D00ED62B2 /* Assets.xcassets */,
 				DD2582D12B6A4D1D00ED62B2 /* LaunchScreen.storyboard */,
 				DD2582D42B6A4D1D00ED62B2 /* Info.plist */,
@@ -173,6 +176,7 @@
 				DD2582CE2B6A4D1C00ED62B2 /* ControlMusicToSleep.xcdatamodeld in Sources */,
 				DD2582C82B6A4D1C00ED62B2 /* LandingVC.swift in Sources */,
 				DD2582C42B6A4D1C00ED62B2 /* AppDelegate.swift in Sources */,
+				DD3190DF2B6BC1B300C14B31 /* SleepingVC.swift in Sources */,
 				DD756BAC2B6AC99000F2CD03 /* BLETableViewCell.swift in Sources */,
 				DD2582C62B6A4D1C00ED62B2 /* SceneDelegate.swift in Sources */,
 				DD756BA22B6AB44400F2CD03 /* BluetoothSerial.swift in Sources */,
@@ -323,6 +327,7 @@
 				DEVELOPMENT_TEAM = 2DF5SKQK2R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ControlMusicToSleep/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -352,6 +357,7 @@
 				DEVELOPMENT_TEAM = 2DF5SKQK2R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ControlMusicToSleep/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
